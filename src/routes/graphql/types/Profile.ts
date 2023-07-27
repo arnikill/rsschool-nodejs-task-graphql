@@ -12,7 +12,7 @@ export interface memProfile {
     memberTypeId: MemberTypeId,
     userId: string
 }
-export interface membProfile extends memProfile, ID { }
+export interface Profile extends memProfile, ID { }
 
 export const typeOfProfile = new GraphQLObjectType({
     name: 'membProfile',
@@ -23,7 +23,7 @@ export const typeOfProfile = new GraphQLObjectType({
         memberType: {
             type: new GraphQLNonNull(memberType),
             // используется для извлечения типа из базы данных на основе идентификатора типа который хранится в профиле
-            resolve: (source: membProfile, context: Context) => {
+            resolve: (source: Profile, context: Context) => {
                 const loaders = context;
                 return loaders.postsByAuthorIdLoader.load(source.memberTypeId);
             },
@@ -45,14 +45,14 @@ export const typeOfProfile = new GraphQLObjectType({
         , user: {//определяет поле идентификатора пользователя для профиля участника
             type: typeOfUser as GraphQLObjectType,
             //используется для извлечения пользователя из базы данных на основе идентификатора пользователя, который хранится в профиле участника.
-            resolve: (source: membProfile, context: Context) => {
+            resolve: (source: Profile, context: Context) => {
                 const loaders = context;
                 return loaders.postsByAuthorIdLoader.load(source.userId);
             },
         }
     }),
 })
-export const developProfile = new GraphQLInputObjectType({//для создания нового профиля участника
+export const developProfileInputType = new GraphQLInputObjectType({//для создания нового профиля участника
     name: 'DevelopProfile',
     fields: {
         isMan: { type: new GraphQLNonNull(GraphQLBoolean) },
@@ -62,7 +62,7 @@ export const developProfile = new GraphQLInputObjectType({//для создан�
     },
 });
 
-export const modifyProfile = new GraphQLInputObjectType({//для обновления  профиля участника
+export const modifyProfileInputType = new GraphQLInputObjectType({//для обновления  профиля участника
     name: 'ModifyProfile',
     fields: {
         isMan: { type: GraphQLBoolean },
