@@ -52,7 +52,7 @@ export const typeOfProfile = new GraphQLObjectType({
         }
     }),
 })
-export const developProfileInputType = new GraphQLInputObjectType({//для создания нового профиля участника
+export const developProfile = new GraphQLInputObjectType({//для создания нового профиля участника
     name: 'DevelopProfile',
     fields: {
         isMan: { type: new GraphQLNonNull(GraphQLBoolean) },
@@ -62,7 +62,7 @@ export const developProfileInputType = new GraphQLInputObjectType({//для со
     },
 });
 
-export const modifyProfileInputType = new GraphQLInputObjectType({//для обновления  профиля участника
+export const modifyProfile = new GraphQLInputObjectType({//для обновления  профиля участника
     name: 'ModifyProfile',
     fields: {
         isMan: { type: GraphQLBoolean },
