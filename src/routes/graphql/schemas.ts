@@ -1,9 +1,9 @@
 import { Type } from '@fastify/type-provider-typebox'; import { GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLSchema, GraphQLString } from 'graphql';
 import { UUIDType } from './types/uuid.js';
-import { typeOfUser, developUserProfile, modifyUserProfile } from './types/User.js';
+import { typeOfUser, createUserInput, changeUserInput } from './types/User.js';
 import { memberType, memberTypeEnum } from './types/Member.js';
-import { modifyPostProfile, developPostProfile, typeOfPost } from './types/Post.js';
-import { modifyProfile, developProfile, typeOfProfile } from './types/Profile.js';
+import { changePostInput, createPostInput, typeOfPost } from './types/Post.js';
+import { changeProfileInput, typeOfProfile, createProfileInput, } from './types/Profile.js';
 
 
 export const gqlResponseSchema = Type.Partial(
@@ -24,7 +24,7 @@ export const createGqlResponseSchema = {
     },
   ),
 };
-
+//определяет типы запросов и мутаций
 const query = new GraphQLObjectType({
   name: 'Query',
   fields: {
@@ -70,17 +70,17 @@ const query = new GraphQLObjectType({
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
-    developUsers: {
+    createUsers: {
       type: typeOfUser,
       args: {
-        dto: { type: developUserProfile }
+        dto: { type: createUserInput }
       },
     },
-    modifyUsers: {
+    changeUsers: {
       type: typeOfUser,
       args: {
         id: { type: new GraphQLNonNull(UUIDType) },
-        dto: { type: modifyUserProfile }
+        dto: { type: changeUserInput }
       },
     },
     deleteUsers: {
@@ -89,17 +89,17 @@ const mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(UUIDType) }
       },
     },
-    developPost: {
+    createPost: {
       type: typeOfPost as GraphQLObjectType,
       args: {
-        dto: { type: developPostProfile },
+        dto: { type: createPostInput },
       },
     },
-    modifyPost: {
+    changePost: {
       type: typeOfPost as GraphQLObjectType,
       args: {
         id: { type: new GraphQLNonNull(UUIDType) },
-        dto: { type: modifyPostProfile },
+        dto: { type: changePostInput },
       },
     },
     deletePost: {
@@ -108,17 +108,17 @@ const mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(UUIDType) },
       },
     },
-    developProfile: {
+    createProfile: {
       type: typeOfProfile as GraphQLObjectType,
       args: {
-        dto: { type: developProfile }
+        dto: { type: createProfileInput }
       },
     },
-    modifyProfile: {
+    changeProfile: {
       type: typeOfProfile as GraphQLObjectType,
       args: {
         id: { type: new GraphQLNonNull(UUIDType) },
-        dto: { type: modifyProfile }
+        dto: { type: changeProfileInput }
       }
     },
     deleteProfile: {

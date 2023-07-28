@@ -14,7 +14,7 @@ const getThisProfiles = async ({ prisma }: Context) => {
     return JSON.stringify(allprofiles);
 }
 
-const developProfile = async ({ dto: data }: { dto: Profile }, { prisma }: Context) => {
+const createProfile = async ({ dto: data }: { dto: Profile }, { prisma }: Context) => {
     try {
         const profile = await prisma.profile.create({ data });
         console.log(profile)
@@ -23,7 +23,7 @@ const developProfile = async ({ dto: data }: { dto: Profile }, { prisma }: Conte
     }
 };
 
-const modifyProfile = async ({ id }: ID, { dto: data }: { dto: memProfile }, { prisma }: Context) => {
+const changeProfile = async ({ id }: ID, { dto: data }: { dto: memProfile }, { prisma }: Context) => {
     try {
         const profile = await prisma.profile.update({
             where: { id },
@@ -47,7 +47,7 @@ const deletedProfile = async ({ id }: ID, { prisma }: Context) => {
 export default {
     getThisProfile,
     getThisProfiles,
-    developProfile,
-    modifyProfile,
+    createProfile,
+    changeProfile,
     deletedProfile,
 }

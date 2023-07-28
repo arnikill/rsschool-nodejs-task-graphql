@@ -25,7 +25,7 @@ export const typeOfPost = new GraphQLObjectType({
         }
     })
 })
-export const developPostProfile = new GraphQLInputObjectType({//для создания нового профиля участника
+export const createPostInput = new GraphQLInputObjectType({//для создания нового профиля участника
     name: 'DevelopProfile',
     fields: {
         title: { type: new GraphQLNonNull(GraphQLString) },
@@ -34,7 +34,7 @@ export const developPostProfile = new GraphQLInputObjectType({//для созд�
     },
 });
 
-export const modifyPostProfile = new GraphQLInputObjectType({//для обновления  профиля участника
+export const changePostInput = new GraphQLInputObjectType({//для обновления  профиля участника
     name: 'ModifyProfile',
     fields: {
         title: { type: (GraphQLString) },

@@ -68,7 +68,7 @@ export const typeOfUser = new GraphQLObjectType({//новый тип входн�
 })
 
 
-export const developUserProfile = new GraphQLInputObjectType({ //для создания новых пользовательских объектов
+export const createUserInput = new GraphQLInputObjectType({ //для создания новых пользовательских объектов
     name: 'developTypeOfUser',
     fields: {
         name: { type: new GraphQLNonNull(GraphQLString) },
@@ -77,7 +77,7 @@ export const developUserProfile = new GraphQLInputObjectType({ //для созд
 })
 
 
-export const modifyUserProfile = new GraphQLInputObjectType({//используется для обновления существующих пользовательских объектов
+export const changeUserInput = new GraphQLInputObjectType({//используется для обновления существующих пользовательских объектов
     name: 'ChangeTypeOfUser',
     fields: {
         name: { type: (GraphQLString) },

@@ -5,12 +5,12 @@ const toGetTypeOfMember = async ({ id }: ID, { prisma }: Context) => {
   const memberType = await prisma.memberType.findUnique({
     where: { id }
   });
-  return memberType;
+  console.log(memberType)
 }
 
 const toGetTypeOfMembers = async ({ prisma }: Context) => {
   const memberTypes = await prisma.memberType.findMany();
-  return memberTypes;
+  console.log(memberTypes)
 }
 
 export default {

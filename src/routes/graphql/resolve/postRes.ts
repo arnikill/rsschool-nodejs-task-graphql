@@ -16,13 +16,13 @@ const getPosts = async ({ prisma }: Context) => {
     console.log(allposts)
 };
 
-const developPost = async ({ dto: data }: { dto: AboutPost }, { prisma }: Context) => {
+const createPost = async ({ dto: data }: { dto: AboutPost }, { prisma }: Context) => {
     //возвращает массив всех сообщений в базе данных.
     const post = await prisma.post.create({ data });
     return post;
 };
 
-const modifyPost = async ({ id, dto: data }: ID & { dto: Partial<AboutPost> }, { prisma }: Context) => {
+const changePost = async ({ id, dto: data }: ID & { dto: Partial<AboutPost> }, { prisma }: Context) => {
     ////принимает идентификатор и объект данных и обновляет существующий пост в базе данных на основе идентификатора и объекта данных.
     try {
         const post = await prisma.post.update({
@@ -48,7 +48,7 @@ const deletePost = async ({ id }: ID, { prisma }: Context) => {
 export default {
     post: getPost,
     posts: getPosts,
-    developPost,
-    modifyPost,
+    createPost,
+    changePost,
     deletePost,
 };
